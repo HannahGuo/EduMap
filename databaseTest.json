@@ -1,0 +1,24 @@
+{
+    "study-groups": [
+        {
+            "privacy-type": "private",
+            "name": "Test Group 1",
+            "capacity": 5,
+            "location": "1490 Ogden Avenue",
+            "time": "9AM",
+            "subject": "Functions",
+            "grade": 11,
+            "other-messages": "Come here!"
+        },
+        {
+            "privacy-type": "public",
+            "name": "Test Group 2",
+            "capacity": 12,
+            "location": "1201 Ogden Avenue",
+            "time": "11AM",
+            "subject": "Advanced Functions",
+            "grade": 12,
+            "other-messages": "Come now!"
+        }
+    ]
+}
