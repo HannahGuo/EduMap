@@ -1,0 +1,34 @@
+{
+    "studyGroups": [
+        {
+            "host": "Lux",
+            "privacyType": "public",
+            "name": "Test Group 2",
+            "capacity": 12,
+            "location": "1201 Ogden Avenue",
+            "time": "11AM",
+            "subject": "Advanced Functions",
+            "grade": 12,
+            "otherMessages": "Come now!",
+            "coordinates": {
+                "lat": 43.16,
+                "lng": -79.6446
+            }
+        },
+        {
+            "host": "Jhin",
+            "privacyType": "public",
+            "name": "Test Group 2",
+            "capacity": 12,
+            "location": "1201 Ogden Avenue",
+            "time": "11AM",
+            "subject": "Advanced Functions",
+            "grade": 12,
+            "otherMessages": "Come now!",
+            "coordinates": {
+                "lat": 43.56,
+                "lng": -79.6446
+            }
+        }
+    ]
+ }
