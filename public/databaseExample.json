@@ -3,7 +3,7 @@
         {
             "host": "Lux",
             "privacyType": "public",
-            "name": "Test Group 2",
+            "name": "Test Group 1",
             "capacity": 12,
             "location": "1201 Ogden Avenue",
             "time": "11AM",
@@ -13,6 +13,11 @@
             "coordinates": {
                 "lat": 43.16,
                 "lng": -79.6446
+            },
+            "attendees": {  
+                "host": {
+                    "name": "lux"
+                }
             }
         },
         {
@@ -28,6 +33,11 @@
             "coordinates": {
                 "lat": 43.56,
                 "lng": -79.6446
+            },
+            "attendees": {  
+                "host": {
+                    "name": "jhin"
+                }
             }
         }
     ]

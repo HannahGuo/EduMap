@@ -12,6 +12,7 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANow_dOABv6DsG0qdgPCcUYx6uyuULBgE&callback=init&libraries=places"
         type="text/javascript"></script>
+    <script src="scripts/map.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,12 +21,24 @@
 
         <span>This page allows you to search for an area and filter for specific types of EduGroups.</span>
 
-        <input id="search" class="centerMe" placeholder="Zoom to Location..."></input>
+        <input id="search" class="centerMe" placeholder="Search for a location..."></input>
+        <button id="userZoom" class="centerMe">Zoom to your Location</button>
         <div id="map" class="centerMe"></div>
         <br>
+        <span class="titleFont">Join an EduGroup</span>
+
+        <form id="myForm">
+            <input class="formTextInput" type="text" name="edugroup" placeholder="Find an EduGroup to Join Above!" minlength="2"
+                required readonly><br>
+            <input class="formTextInput" type="text" name="name" placeholder="Name..." minlength="2" required><br>
+            <input class="formTextInput" type="text" name="school" placeholder="School..." minlength="2" required><br>
+            <input class="formTextInput" type="number" name="grade" placeholder="Grade..." maxlength="2" required><br>
+            <input class="formTextInput" type="email" name="email" placeholder="example@gmail.com" required><br>
+            <input class="formTextInput" type="text" name="notes" placeholder="Notes..." required><br>
+            <input onclick="sendData();" type="button" name="submit" value="Submit"><br><br>
+        </form>
         <button onclick="location.href='signin.html'" id="create">Want to create an EduGroup? Click here!</button>
+
     </div>
 </body>
-<script src="scripts/map.js" type="text/javascript"></script>
-
 </html>
