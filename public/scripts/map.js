@@ -320,18 +320,23 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function createInfoWindowStr(host, name, location, time, subject, grade, otherMessages, i) {
   return "<h3>" + name + "</h3>" + " <b>Host: </b>" + host + "<br><b>Address: </b>" + location +
-    "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade + "<br><b>Other Messages: </b>" + otherMessages + "<br><br><button onclick='runMe(\"" + name + "\")' class=\"join\">Join Group!</button>";
+    "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade + 
+    "<br><b>Other Messages: </b>" + otherMessages + 
+    "<br><br><button onclick='runMe(\"" + name + "\"," + i + ")' class=\"join\">Join Group!</button>";
 }
 
-function runMe(thisName) {
+function runMe(thisName, thisId) {
   document.getElementById("myForm").elements["edugroup"].value = thisName;
+  document.getElementById("myForm").elements["edugroupID"].value = thisId;
 }
 
-function sendData(){
+function sendData() {
   // Random ID Generator courtesy of https://gist.github.com/gordonbrander/2230317
   var randomID = Math.random().toString(36).substr(2, 9);
-  
-  firebase.database().ref('studyGroups/0/attendees/' + randomID).update({
+
+  var groupID = document.getElementById("myForm").elements["edugroupID"].value;
+
+  firebase.database().ref("studyGroups/" + groupID + "/attendees/" + randomID).update({
     name: document.getElementById("myForm").elements["name"].value,
     school: document.getElementById("myForm").elements["school"].value,
     grade: document.getElementById("myForm").elements["grade"].value,
@@ -340,4 +345,50 @@ function sendData(){
   });
 
   console.log("Added User to EduGroup!");
+}
+
+$(document).ready(function () {
+  $(document).on('submit', '#myForm', function () {
+    console.log("User added to EduGroup!");
+    sendData();
+    showSnackBar();
+    sendEmail();
+    clearFormData();
+    return false;
+  });
+});
+
+
+// Thanks to https://www.smtpjs.com/ and https://elasticemail.com/ for e-mail sending code
+function sendEmail() {
+  Email.send({
+    Host: "smtp.elasticemail.com",
+    Username: "658515@pdsb.net",
+    Password: "47e3e806-63b2-4911-b621-912225183c3b",
+    To: document.getElementById("myForm").elements["email"].value,
+    From: "658515@pdsb.net",
+    Subject: "You have successfully joined an EduGroup!",
+    Body: "Don't forget! The name of your EduGroup is " + document.getElementById("myForm").elements["edugroup"].value + ".",
+  }).then(
+    message => console.log(message)
+  );
+}
+
+// Snackbar code thanks to https://www.w3schools.com/howto/howto_js_snackbar.asp
+function showSnackBar() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
+
+function clearFormData() {
+  document.getElementById("myForm").elements["name"].value = "";
+  document.getElementById("myForm").elements["school"].value = "";
+  document.getElementById("myForm").elements["grade"].value = "";
+  document.getElementById("myForm").elements["email"].value = "";
+  document.getElementById("myForm").elements["notes"].value = "";
+  document.getElementById("myForm").elements["edugroup"].value = "";
+  document.getElementById("myForm").elements["edugroupID"].value = "";
 }

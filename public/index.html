@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANow_dOABv6DsG0qdgPCcUYx6uyuULBgE&callback=init&libraries=places"
         type="text/javascript"></script>
@@ -34,11 +35,12 @@
             <input class="formTextInput" type="text" name="school" placeholder="School..." minlength="2" required><br>
             <input class="formTextInput" type="number" name="grade" placeholder="Grade..." maxlength="2" required><br>
             <input class="formTextInput" type="email" name="email" placeholder="example@gmail.com" required><br>
-            <input class="formTextInput" type="text" name="notes" placeholder="Notes..." required><br>
-            <input onclick="sendData();" type="button" name="submit" value="Submit"><br><br>
+            <input class="formTextInput" type="text" name="notes" placeholder="Notes..."><br>
+            <input id="submitButton" type="submit" name="submit" value="Submit"><br><br>
+            <input id="hideMe" type="hidden" name="edugroupID" placeholder="EduGroupID" required readonly><br>
         </form>
         <button onclick="location.href='signin.html'" id="create">Want to create an EduGroup? Click here!</button>
-
+        <div id="snackbar">You have joined this EduGroup!</div>
     </div>
 </body>
 </html>
