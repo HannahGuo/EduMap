@@ -17,7 +17,6 @@ function logIn() {
     firebase.auth().signInWithPopup(provider).then(function (result) {
         var token = result.credential.accessToken;
         var user = result.user;
-        console.log(user.displayName);
     }).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -37,21 +36,19 @@ function logOut() {
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        console.log(user);
         document.getElementById("currentSignIn").innerHTML = "You are signed in as " + " <span id=\"thisName\">" + user.displayName + " </span> with the e-mail <span id='thisEmail'>" + user.email + "<span>";
         document.getElementById("currentSignIn").style.color = "green";
         document.getElementById("fillMeWhenSignIn").style.display = "block";
 
         var searchBox = new google.maps.places.SearchBox(document.getElementById('location'));
 
-
         database.on("value", function (snapshot) {
             console.log("Database reached!")
             dataRetrieved = snapshot.val();
-            dataRetrieved.forEach(function (entry) {
+            dataRetrieved.forEach(function (entry, i) {
                 console.log(entry.email + " " + user.email);
 
-                if (entry.email == user.email) {
+                if ((entry.email == user.email) && dataRetrieved.length > document.getElementById("showEduGroups").rows.length) {
                     var row = document.getElementById("showEduGroups").insertRow(-1);
 
                     var cell0 = row.insertCell(0);
@@ -70,7 +67,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     cell4.innerHTML = entry.name;
 
                     var cell5 = row.insertCell(5);
-                    cell5.innerHTML = entry.capacity;
+                    cell5.innerHTML = Object.keys(entry.attendees).length + " out of " + entry.capacity;
 
                     var cell6 = row.insertCell(6);
                     cell6.innerHTML = entry.location;
@@ -82,31 +79,40 @@ firebase.auth().onAuthStateChanged(function (user) {
                     cell8.innerHTML = entry.grade;
 
                     var cell9 = row.insertCell(9);
-                    console.log(entry.attendees);
                     cell9.innerHTML = organizeAttendees(entry.attendees);
+
+                    var cell10 = row.insertCell(10);
+                    cell10.innerHTML = "<span onclick=\"deleteMe(" + i + ")\"> X <span>";
+                    cell10.className = "removeGroup";
+                    cell10.id = "r" + i;
                 }
             });
 
             $(document).ready(function () {
                 $(document).on('submit', '#myForm2', function () {
-                    console.log("User added to EduGroup!");
                     $.get(genUrl(document.getElementById("myForm2").elements["location"].value), function (data, status) {
                         sendData(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
                     });
-                    return false;
+                    alert("You created an EduGroup!");
                 });
             });
 
-            function sendData(lat, lng) {
-                console.log("SAVE ME " + user.displayName);
-                var origString = document.getElementById("myForm2").elements["location"].value.substr(0, 40);
-                var trimString = origString.substr(0, Math.min(origString.length, origString.lastIndexOf(" ")))
+            function findValidID(){
+                for(var i = 0; i < dataRetrieved.length; i++) {
+                    if(!(i in dataRetrieved)){
+                        return i; 
+                    }
+                }
 
-                firebase.database().ref("studyGroups/" + (dataRetrieved.length) + "/").set({
+                return dataRetrieved.length;
+            }
+
+            function sendData(lat, lng) {
+                firebase.database().ref("studyGroups/" + (findValidID()) + "/").set({
                     host: user.displayName,
                     email: user.email,
                     name: document.getElementById("myForm2").elements["name"].value,
-                    location: trimString,
+                    location: document.getElementById("myForm2").elements["location"].value,
                     date: document.getElementById("myForm2").elements["date"].value,
                     time: document.getElementById("myForm2").elements["time"].value,
                     capacity: document.getElementById("myForm2").elements["capacity"].value,
@@ -151,4 +157,9 @@ function organizeAttendees(attendees) {
 
 function genUrl(location) {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" + location.split(' ').join('+') + "&key=AIzaSyANow_dOABv6DsG0qdgPCcUYx6uyuULBgE";
+}
+
+function deleteMe(id){
+    firebase.database().ref("studyGroups/" + id + "/").remove();
+    location.reload();
 }

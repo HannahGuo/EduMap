@@ -61,3 +61,11 @@ th {
     border-bottom: 3px solid black;
 }
 
+.removeGroup { 
+    color: red;
+}
+
+.removeGroup:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
