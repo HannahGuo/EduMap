@@ -249,7 +249,7 @@ function init() {
   database.on("value", function (snapshot) {
     dataRetrieved = snapshot.val();
     dataRetrieved.forEach(function (entry, i) {
-      addMarker(createLatLng(entry.coordinates.lat, entry.coordinates.lng), map, createInfoWindowStr(entry.host, entry.name, entry.location, entry.time, entry.subject, entry.grade, entry.otherMessages, i));
+      addMarker(createLatLng(entry.coordinates.lat, entry.coordinates.lng), map, createInfoWindowStr(entry.host, entry.name, entry.location, entry.date, entry.time, entry.subject, entry.grade, entry.otherMessages, i));
     });
     console.log("Database reached!")
   }, function (error) {
@@ -318,9 +318,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-function createInfoWindowStr(host, name, location, time, subject, grade, otherMessages, i) {
+function createInfoWindowStr(host, name, location, date, time, subject, grade, otherMessages, i) {
   return "<h3>" + name + "</h3>" + " <b>Host: </b>" + host + "<br><b>Address: </b>" + location +
-    "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade + 
+    "<br><b>Date: </b>" + date + "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade + 
     "<br><b>Other Messages: </b>" + otherMessages + 
     "<br><br><button onclick='runMe(\"" + name + "\"," + i + ")' class=\"join\">Join Group!</button>";
 }
@@ -357,7 +357,6 @@ $(document).ready(function () {
     return false;
   });
 });
-
 
 // Thanks to https://www.smtpjs.com/ and https://elasticemail.com/ for e-mail sending code
 function sendEmail() {
