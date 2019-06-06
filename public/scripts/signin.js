@@ -120,7 +120,13 @@ firebase.auth().onAuthStateChanged(function (user) {
                     grade: document.getElementById("myForm2").elements["grade"].value,
                     otherMessages: document.getElementById("myForm2").elements["otherMessages"].value,
                     attendees: {
-                        host: "me",
+                        host: {
+                            email: user.email,
+                            grade: document.getElementById("myForm2").elements["grade"].value,
+                            name: user.displayName,
+                            notes: "",
+                            school: "your school"
+                        },
                     },
                     coordinates: {
                         "lat": lat,
