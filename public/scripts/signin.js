@@ -113,6 +113,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     email: user.email,
                     name: document.getElementById("myForm2").elements["name"].value,
                     location: document.getElementById("myForm2").elements["location"].value,
+                    subject: document.getElementById("myForm2").elements["subject"].value,
                     date: document.getElementById("myForm2").elements["date"].value,
                     time: document.getElementById("myForm2").elements["time"].value,
                     capacity: document.getElementById("myForm2").elements["capacity"].value,

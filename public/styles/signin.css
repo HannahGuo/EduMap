@@ -1,5 +1,5 @@
 #signinbutton {
-    background-color: blue;
+    background-color: #4eb5f1;
     color: white;
     padding: 10px;
     text-align: center;
@@ -14,11 +14,11 @@
 }
 
 #signinbutton:hover {
-    background-color: darkblue;
+    background-color: #4095c6;
 }
 
 #signoutbutton {
-    background-color: blue;
+    background-color: #4eb5f1;
     color: white;
     padding: 10px;
     text-align: center;
@@ -33,7 +33,7 @@
 }
 
 #signoutbutton:hover {
-    background-color: darkblue;
+    background-color: #4095c6;
 }
 
 .noShow {

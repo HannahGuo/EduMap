@@ -2,13 +2,14 @@ html,
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .titleFont {
-    font-family: 'Fredoka One', cursive;
-    font-size: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
     margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .centerMe {
@@ -113,7 +114,7 @@ body {
 }
 
 #create {
-    background-color: blue;
+    background-color: #4eb5f1;
     color: white;
     padding: 10px;
     text-align: center;
@@ -128,5 +129,5 @@ body {
 }
 
 #create:hover {
-    background-color: darkblue;
+    background-color: #4095c6;
 }

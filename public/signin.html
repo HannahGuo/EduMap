@@ -5,7 +5,7 @@
     <title>EduMap</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <link rel="stylesheet" type="text/css" href="styles/signin.css" />
-    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
@@ -18,7 +18,7 @@
 
 <body>
     <div id="content">
-        <span class="titleFont">Access EduGroup</span>
+        <span class="titleFont">ACCESS EDUGROUPS</span>
 
         <span>This page allows you to create an EduGroup.</span><br>
         <span>Please <b>sign in</b> with Google to access EduMap services!</span>
@@ -29,7 +29,7 @@
 
         <div id="fillMeWhenSignIn">
             <br><br>
-            <span class="titleFont">View your EduGroups!</span><br><br>
+            <span class="titleFont">VIEW YOUR EDUGROUPS!</span><br><br>
             <table id="showEduGroups">
                 <thead>
                     <th>Host</th>
@@ -45,17 +45,18 @@
                     <th>Remove?</th>
                 </thead>
             </table><br><br>
-            <span class="titleFont">Add an EduGroup!</span><br><br>
+            <span class="titleFont">ADD AN EDUGROUP!</span><br><br>
             <form id="myForm2">
                 <input class="formTextInput" type="text" name="name" placeholder="Name your EduGroup..."
-                    minlength="5"><br>
+                    minlength="5" required><br>
                 <input id="location" class="formTextInput" type="text" name="location" placeholder="Hosting Location..."
-                    minlength="2"><br>
-                <input class="formTextInput" type="date" name="date" placeholder="Date..." maxlength="3"><br>
-                <input class="formTextInput" type="time" name="time" placeholder="Time..." maxlength="3"><br>
-                <input class="formTextInput" type="text" name="capacity" placeholder="Capacity..."><br>
-                <input class="formTextInput" type="number" name="grade" placeholder="Grade..."><br>
-                <input class="formTextInput" type="text" name="otherMessages" placeholder="Other Notes..."><br>
+                    minlength="2" required><br>
+                <input class="formTextInput" type="date" name="date" placeholder="Date..." required><br>
+                <input class="formTextInput" type="time" name="time" placeholder="Time..." required><br>
+                <input class="formTextInput" type="subject" name="subject" placeholder="Subject..." required><br>
+                <input class="formTextInput" type="text" name="capacity" placeholder="Capacity..." required><br>
+                <input class="formTextInput" type="number" name="grade" placeholder="Grade..." required><br>
+                <input class="formTextInput" type="text" name="otherMessages" placeholder="Other Notes..." required><br>
                 <input id="submitButton" type="submit" name="submit" value="Add EduGroup"><br><br>
             </form>
         </div>

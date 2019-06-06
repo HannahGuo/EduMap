@@ -38,3 +38,7 @@
     padding: 8px;
     width: 200px;
 }
+
+#userZoom:hover {
+    background-color: lightgrey;
+}
