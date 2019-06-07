@@ -201,9 +201,7 @@ var config = {
   appID: "1:763874557198:web:4fd77b99972e788c",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
+if (!firebase.apps.length) firebase.initializeApp(config);
 
 var database = firebase.database().ref("/studyGroups");
 
@@ -232,12 +230,7 @@ function init() {
   $("#userZoom").click(function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        map.setCenter(pos);
-
+        map.setCenter(createLatLng(position.coords.latitude, position.coords.longitude));
       }, function () {
         handleLocationError(true, infoWindow, map.getCenter());
       });
@@ -320,8 +313,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function createInfoWindowStr(host, name, location, date, time, subject, grade, otherMessages, i) {
   return "<h3>" + name + "</h3>" + " <b>Host: </b>" + host + "<br><b>Address: </b>" + location +
-    "<br><b>Date: </b>" + date + "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade + 
-    "<br><b>Other Messages: </b>" + otherMessages + 
+    "<br><b>Date: </b>" + date + "<br><b>Time: </b> " + time + " <br><b>Subject: </b>" + subject + "<br><b>Grade: </b>" + grade +
+    "<br><b>Other Messages: </b>" + otherMessages +
     "<br><br><button onclick='runMe(\"" + name + "\"," + i + ")' class=\"join\">Join Group!</button>";
 }
 

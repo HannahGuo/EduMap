@@ -15,14 +15,9 @@ var provider = new firebase.auth.GoogleAuthProvider();
 
 function logIn() {
     firebase.auth().signInWithPopup(provider).then(function (result) {
-        var token = result.credential.accessToken;
-        var user = result.user;
+        console.log("Signed in!");
     }).catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-        console.log(errorCode);
+        console.log("Could not sign in " + error.code);
     });
 }
 
@@ -30,7 +25,7 @@ function logOut() {
     firebase.auth().signOut().then(function () {
         console.log("Signed out!");
     }).catch(function (error) {
-        console.log("Could not sign out!");
+        console.log("Could not sign out " + error.code);
     });
 }
 
@@ -46,8 +41,6 @@ firebase.auth().onAuthStateChanged(function (user) {
             console.log("Database reached!")
             dataRetrieved = snapshot.val();
             dataRetrieved.forEach(function (entry, i) {
-                console.log(entry.email + " " + user.email);
-
                 if ((entry.email == user.email) && dataRetrieved.length > document.getElementById("showEduGroups").rows.length) {
                     var row = document.getElementById("showEduGroups").insertRow(-1);
 
@@ -97,13 +90,11 @@ firebase.auth().onAuthStateChanged(function (user) {
                 });
             });
 
-            function findValidID(){
-                for(var i = 0; i < dataRetrieved.length; i++) {
-                    if(!(i in dataRetrieved)){
-                        return i; 
-                    }
+            function findValidID() {
+                for (var i = 0; i < dataRetrieved.length; i++) {
+                    if (!(i in dataRetrieved))
+                        return i;
                 }
-
                 return dataRetrieved.length;
             }
 
@@ -143,9 +134,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("fillMeWhenSignIn").style.display = "none";
         document.getElementById("currentSignIn").innerHTML = "You are currently not signed in!";
         document.getElementById("currentSignIn").style.color = "red";
-        while (document.getElementById("showEduGroups").rows.length > 1) {
+        while (document.getElementById("showEduGroups").rows.length > 1)
             document.getElementById("showEduGroups").deleteRow(-1);
-        }
     }
 });
 
@@ -166,7 +156,7 @@ function genUrl(location) {
     return "https://maps.googleapis.com/maps/api/geocode/json?address=" + location.split(' ').join('+') + "&key=AIzaSyANow_dOABv6DsG0qdgPCcUYx6uyuULBgE";
 }
 
-function deleteMe(id){
+function deleteMe(id) {
     firebase.database().ref("studyGroups/" + id + "/").remove();
     location.reload();
 }
